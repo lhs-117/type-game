@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,600;1,600&display=swap');
+
+
+.random_sentence {
+    font-size: 24px;
+    line-height: 1.5;
+    margin: 20px 0;
+    font-family: "Work Sans" !important;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    color: #ffffff60;
+}
+
+.random_sentence span {
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.random_sentence span.current {
+    text-decoration: underline;
+    color: #2196f3;
+}
+
+.random_sentence span.correct {
+    color: green;
+}
+
+.random_sentence span.incorrect {
+    text-decoration: underline red;
+    color: red;
+}
+
