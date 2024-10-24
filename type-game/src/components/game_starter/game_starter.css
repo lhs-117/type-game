@@ -1,64 +1,6 @@
-
-.random-sentence-wrapper {
-    transition: opacity 1s ease-in-out;
-    opacity: 1; /* Initially visible */
-    width: 1000px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px outset #fff;
-    padding: 20px;
-    margin: 20px;
-    background-color: #000000;
-    
-}
-
-
-
-
-.random-sentence-fade-out {
-    animation: fadeOut 1s forwards;
-}
-
-
-
-.content-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-
-
-
-.result-container {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px outset #fff;
-    padding: 20px;
-    margin: 20px;
-    background-color: #000000;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    color: #fff;
-}
-
-.result-container.show{
-    animation: fadeIn 1s forwards; /* Apply fade-in animation */
-}
-
-
-
-
 .button-container {
     bottom: 35px;
-    position: relative;
-    
+    position: relative;   
 }
 
 .play-button img {
@@ -95,21 +37,17 @@
 
 
 
-
 .circular-progress {
     left: 1455px;
-
-
-position: absolute;
-width: 40px;
-height: 40px;
-border-radius: 50%;
-background: conic-gradient(
-#4caf50 calc(var(--percentage) * 1%),
-#ddd 0
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: conic-gradient(
+    #4caf50 calc(var(--percentage) * 1%),
+    #ddd 0
 );
 }
-
 
 .circular-progress-wrapper {
     transition: opacity 1s ease-out;
@@ -118,6 +56,61 @@ background: conic-gradient(
 
 .circular-progress-wrapper.fade-out {
     opacity: 0;
+}
+
+
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+
+.random-sentence-wrapper {
+    transition: opacity 1s ease-in-out;
+    opacity: 1; 
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px outset #fff;
+    padding: 20px;
+    margin: 20px;
+    background-color: #000000;
+    
+}
+
+.random-sentence-fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+
+
+
+
+.result-container {
+    font-family: 'Comic Sans MS', cursive;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px outset #fff;
+    padding: 20px;
+    margin: 20px;
+    background-color: #000000;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    color: #fff;
+}
+
+.result-container.show{
+    animation: fadeIn 1s forwards;
 }
 
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './random_sentence.css';
 
+
 class RandomSentence extends Component {
     constructor(props) {
         super(props);

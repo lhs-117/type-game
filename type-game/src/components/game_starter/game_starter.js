@@ -3,7 +3,6 @@ import RandomSentence from '../random_sentence/random_sentence';
 import './game_starter.css';
 import startButton from '../images/play-image.webp';
 import restartButton from '../images/restart-image.png';
-import { CircularProgressbar, buildStyles} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 
@@ -11,14 +10,14 @@ class GameStarter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numberOfWords: 30,               // Can be modified to make longer sentences
-            currentIndex: 0,                // Better not modify the value
+            numberOfWords: 30,               
+            currentIndex: 0,                
             isCorrect: true,
-            isTypingAllowed: false,         // State variable to control typing
+            isTypingAllowed: false,         
             totalKeystrokes : 0,
             keystrokesCorrect: 0,
             correctWords: 0,
-            timeLeft: 10,                   // Standard time for now will be 60s
+            timeLeft: 10,                   
             showResults: false,             // Show results when game is over, now keep it false
             fadeOut: false,                 // Begin with fadeOut invisible
             gameStarted: false,
@@ -28,24 +27,22 @@ class GameStarter extends Component {
         this.timerInterval = null;
     }
 
-
-        startGame = () => {
-        this.setState({ 
+    // First load of the game
+    startGame = () => {
+    this.setState({ 
             isTypingAllowed: true, 
             gameStarted: true,
             showResults: false,
-        }, () => {
-            // Generate a new sentence once the game has started
-            
-            this.randomSentenceRef.current.generateRandomSentence();
-            
-            this.startTimer(); // Start the timer
+        }, 
+        () => {
+            this.randomSentenceRef.current.generateRandomSentence();       
+            this.startTimer();
         });
     }
 
+    // Restart game, without refreshing the page
     restartGame = () => {
-        clearInterval(this.timerInterval);
-        
+        clearInterval(this.timerInterval);      
         this.setState({
             currentIndex: 0,
             isCorrect: true,
@@ -57,12 +54,9 @@ class GameStarter extends Component {
             showResults: false,
             fadeOut: false,
             gameStarted: true,
-        }, () => {
-            // Generate a new random sentence after updating the state
-
-            this.randomSentenceRef.current.generateRandomSentence();
-            
-            // Start the timer after generating the new sentence
+        },
+        () => {
+            this.randomSentenceRef.current.generateRandomSentence();            
             this.startTimer();
         });
     }
@@ -80,6 +74,7 @@ class GameStarter extends Component {
             return;
         }
 
+        // Determine current letter
         const currentLetter = this.randomSentenceRef.current.getCurrentLetter(currentIndex);
 
         // Add to totalKeystrokes everytime a key is pressed
@@ -123,7 +118,7 @@ class GameStarter extends Component {
         
         else {
 
-            // If incorrect, mark as incorrect and don't proceed
+            // If incorrect mark as incorrect and don't proceed
             if (isCorrect) {
                 this.setState ({ 
                     isCorrect: false,
@@ -132,46 +127,32 @@ class GameStarter extends Component {
         }
     }
 
-
-    // Allow typing to be done when clicking on the container and start timer if not already started
-
+    // Allows the game to start and posterior restarts
     handleButtonClick = () => {
         if (this.state.gameStarted) {
             this.restartGame();
         } else {
             this.startGame();
         }
-        // Remove the focus from the button when i click,
-        // so it doesn't reset the game when i press the space key
+        // Remove the focus from the button
         document.activeElement.blur();
-    }
-
-    // Disable the ability to keep typing when clicking out of the container
-    handleDocumentClick = (event) => {
-        if (this.containerRef.current && !this.containerRef.current.contains(event.target)) {
-            this.setState({ isTypingAllowed: false });
-        }
     }
 
     // Allow event listener
     componentDidMount() {
         document.addEventListener('keypress', this.handleKeyPress);
-        document.addEventListener('mousedown', this.handleDocumentClick);
     }
 
     // Disable event listener
     componentWillUnmount() {
         document.removeEventListener('keypress', this.handleKeyPress);
-        document.removeEventListener('mousedown', this.handleDocumentClick);
         clearInterval(this.timerInterval);
     }
 
     // Timer logic
-    startTimer = () => {
-        
+    startTimer = () => {       
         // Clear any existing timer
         if (this.timerInterval) {clearInterval(this.timerInterval)}
-
         this.timerInterval = setInterval(() => {
             this.setState((prevState) => {
                 if (prevState.timeLeft > 0) {
@@ -179,7 +160,6 @@ class GameStarter extends Component {
                 } 
                 else {
                     clearInterval(this.timerInterval);
-
                     // Start fade-out animation
                     this.setState({fadeOut: true});
                     setTimeout(() => {
@@ -187,12 +167,14 @@ class GameStarter extends Component {
                             isTypingAllowed: false,
                             showResults: true,
                         });
-                    }, 1000);        // Delay to match fade-out
-
-                    return {};       // Show the results when timer ends
+                    // Delay to match fade-out
+                    }, 1000);
+                // Show result-container
+                return {};
                 }
             });
-        }, 1000);                   // This logic will be executed every seconds due to 1000ms (1s)
+        // This logic will be executed every seconds due to 1000ms (1s)
+        }, 1000);                   
     } 
 
     // Accuracy logic
@@ -204,7 +186,9 @@ class GameStarter extends Component {
     render() {
         const { numberOfWords, currentIndex, isCorrect, correctWords, timeLeft, showResults, fadeOut, gameStarted } = this.state;
         const accuracy = this.accuracyScore();
-        const timePercentage = (timeLeft/60) * 100;
+        // Need to define maxTime manually
+        const maxTime = 10;
+        const timePercentage = (timeLeft/maxTime) * 100;
 
         return (
         <div>
@@ -224,7 +208,6 @@ class GameStarter extends Component {
                 <div className="circular-progress" style={{ '--percentage': timePercentage }}> </div>
             </div>
 
-
             <div ref={this.containerRef} className='content-container'>
                 {!showResults ? (
                     <div className={`random-sentence-wrapper ${fadeOut ? 'random-sentence-fade-out' : ''}`}>
@@ -232,16 +215,14 @@ class GameStarter extends Component {
                             numberOfWords={numberOfWords} 
                             currentIndex={currentIndex} 
                             isCorrect={isCorrect} 
-                            ref={this.randomSentenceRef} /> 
-                        
-
-                        
+                            ref={this.randomSentenceRef} 
+                        />
                     </div>
                 ) : (
                     <div className={`result-container ${showResults ? 'show' : ''}`}>
-                        <h2>Game Results</h2>
+                        <h2>Game Results:</h2>
                         <p>Accuracy: {accuracy.toFixed(2)}%</p>
-                        <p>WPM: {correctWords}</p>
+                        <p>WPM: {correctWords * 60 / maxTime}</p>
                     </div>
                 )}
             </div>
