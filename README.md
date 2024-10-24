@@ -1,5 +1,7 @@
 # TYPE TYPE GAME
 
+### Video Demo: <https://www.youtube.com/watch?v=QlJB1WiJLYE&ab_channel=MorsaVesga>
+
 ## Description
 
 This project consists of a fast typing game, where the goal is simply to determine how fast you can type in 1 minute. When the timer hits zero, it'll show you your accuracy and your WPM (words per minute). Similar games can be seen like Monkey Type, which consists of the same goals: to see how fast you can type. To achieve the goal of this project I used **JavaScript**, **CSS** and the **React** Framework. With this in mind I created 2 files to operate the program:

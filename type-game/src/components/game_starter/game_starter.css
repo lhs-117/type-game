@@ -44,7 +44,7 @@
     height: 40px;
     border-radius: 50%;
     background: conic-gradient(
-    #4caf50 calc(var(--percentage) * 1%),
+    #48b02c calc(var(--percentage) * 1%),
     #ddd 0
 );
 }
