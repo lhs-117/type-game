@@ -17,7 +17,7 @@ class GameStarter extends Component {
             totalKeystrokes : 0,
             keystrokesCorrect: 0,
             correctWords: 0,
-            timeLeft: 40,                   
+            timeLeft: 60,                   
             showResults: false,             // Show results when game is over, now keep it false
             fadeOut: false,                 // Begin with fadeOut invisible
             gameStarted: false,
@@ -49,7 +49,7 @@ class GameStarter extends Component {
             totalKeystrokes: 0,
             keystrokesCorrect: 0,
             correctWords: 0,
-            timeLeft: 40,
+            timeLeft: 60,
             isTypingAllowed: true,
             showResults: false,
             fadeOut: false,
@@ -187,7 +187,7 @@ class GameStarter extends Component {
         const { numberOfWords, currentIndex, isCorrect, correctWords, timeLeft, showResults, fadeOut, gameStarted } = this.state;
         const accuracy = this.accuracyScore();
         // Need to define maxTime manually
-        const maxTime = 40;
+        const maxTime = 60;
         const timePercentage = (timeLeft/maxTime) * 100;
 
         return (
